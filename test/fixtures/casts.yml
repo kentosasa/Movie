@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: casts
+#
+#  id         :integer          not null, primary key
+#  movie_id   :integer
+#  meta_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  movie_id: 1
+  meta_id: 1
+
+two:
+  movie_id: 1
+  meta_id: 1

@@ -1,0 +1,10 @@
+#movie
+  %h1 本日の新着
+  .content
+    %ul
+      %li.cf
+        .thumnail{ style: "background-image: url(#{@movie.youtube.thumbnail});"}
+        %h2
+          = @movie.title
+        %h3
+          = @movie.story[0, 200] + '...'

@@ -1,0 +1,131 @@
+$base-color: #FFC107;
+$accent-color: #FFA000;
+$white: #fff;
+$header-height: 64px;
+
+body, html{
+  background: #F9F9F9;
+  height: 100%;
+}
+header {
+  background-color: $base-color;
+  height: $header-height;
+  .title {
+    height: 100%;
+    line-height: $header-height;
+    float: left;
+    font-size: 1.5em;
+    color: $white;
+  }
+  .description {
+    height: 100%;
+    line-height: $header-height;
+    font-size: 0.4em;
+    float: left;
+    color: $white;
+    margin-top: 0.8em;
+  }
+  .search-box {
+    float: right;
+    position: relative;
+    height: 100%;
+    $search-box: 28px;
+    width: $search-box + 240px;
+    .box {
+      width: 240px;
+      height: $search-box;
+      border: none;
+      margin: 0px;
+    }
+    .search {
+      position: absolute;
+      height: $search-box;
+      width: $search-box;
+      border: none;
+      background: $accent-color;
+      color: $white;
+      margin-left: 240px;
+      padding: 4px;
+    }
+  }
+}
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+.cf {
+  *zoom: 1;
+}
+.container {
+  width: 960px;
+  margin: 0 auto;
+  height: 100%;
+  position: relative;
+}
+.middle {
+  position: absolute;
+  top: 50%;
+  -moz-transform: translate(0%,-50%);
+  -webkit-transform: translate(0%,-50%);
+  transform:translate(0%, -50%);
+}
+.contents {
+  margin-top: 48px;
+  .main {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    background: $white;
+    width: 650px;
+  }
+  .side-bar {
+    position: absolute;
+    right: 0px;
+    width: 280px;
+    height: 100px;
+    background: $white;
+  }
+}
+#movie {
+  h1 {
+    padding: 4px;
+    font-size: 1em;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+  }
+  .content {
+    ul {
+      padding: 8px;
+      li {
+        width: 100%;
+        padding: 4px;
+        .thumnail {
+          display: inline-block;
+          float: left;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 150px;
+          height: 150px;
+          margin-right: 8px;
+        }
+        h2 {
+          float: left;
+          font-size: 1.2em;
+          display: inline-block;
+          font-weight: bold;
+        }
+        h3 {
+          margin-top: 30px;
+          font-size: 0.8em;
+
+        }
+      }
+    }
+  }
+}
