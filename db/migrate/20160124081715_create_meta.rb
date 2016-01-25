@@ -3,6 +3,7 @@ class CreateMeta < ActiveRecord::Migration
     create_table :meta do |t|
       t.string :name
       t.text :description
+      t.integer :category, default: 0, null: false
 
       t.timestamps null: false
     end

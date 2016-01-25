@@ -14,13 +14,10 @@
 
 class Movie < ActiveRecord::Base
   validates_uniqueness_of :title
+  has_many :metas, through: :meta_relations
+  has_many :comments
   has_one :youtube
   before_save :prepare_save
-
-  def casts
-    Cast.where(self.id)
-  end
-
   def prepare_save
     self.title = self.title.strip
   end

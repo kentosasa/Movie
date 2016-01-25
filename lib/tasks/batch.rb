@@ -1,6 +1,6 @@
 class Tasks::Batch
   def self.execute
-    1.upto(100000) do |i|
+    2326.upto(100000) do |i|
       movie = get_movie("http://movie.walkerplus.com/mv#{i}/")
       youtube(movie)
     end
@@ -19,9 +19,6 @@ class Tasks::Batch
         list << tmp
       end
     end
-    # CSV.open("hoge.csv", "w", :encoding => "UTF-8") do |csv|
-    #   csv << list
-    # end
   end
 
   def self.youtube(movie)
@@ -54,41 +51,66 @@ class Tasks::Batch
       tmp[:id] = item[0]["id"]["videoId"]
       tmp[:title] = item[0]["snippet"]["title"]
     end
-    Youtube.create(movie_id: movie_id, youtube_id: tmp[:id], title: tmp[:title])
+    Youtube.create(movie_id: movie_id, youtube_id: tmp[:id], title: tmp[:title].strip)
+  end
+
+  # コメントの取得
+  def self.youtube_comment
+    id = "5icN4ISebN8"
+    response = Faraday.get "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyBtFzBLcBPM3TRia7AnXRpqX_SCY3y1-KM&textFormat=plainText&part=snippet&videoId=#{id}&maxResults=50"
+
+    JSON.parse(response.body)["items"].each do |item|
+      comment = {}
+      item = item["snippet"]["topLevelComment"]["snippet"]
+      comment[:text] = item["textDisplay"]
+      comment[:user_image] = item["authorProfileImageUrl"]
+      comment[:user_name] = item["authorDisplayName"]
+    end
   end
 
   def self.get_movie(url)
     response = Faraday.get url
     doc = Nokogiri::HTML.parse(response.body)
+
     movie = Movie.create(title: doc.css("#pageHeader .wrap h1").text)
     movie = Movie.find_by_title(doc.css("#pageHeader .wrap h1").text)
-    movie.update(description: doc.css("#mainInfo p").text)
-    movie.update(story: doc.css("#strotyText").text)
+
+    description = doc.css("#mainInfo p").text
+    description = doc.css("#mainInfoNoImage p").text unless description.present?
+    movie.update(description: description.strip)
+
+    movie.update(story: doc.css("#strotyText").text.strip)
+
     doc.css("#infoBox tr").each do |info|
-      movie.update(year: info.css("td").text) if "製作年" == info.css("th").text
+      movie.update(year: info.css("td").text.strip) if "製作年" == info.css("th").text
     end
+
     doc.css("#staffArea tr").each do |staff|
       if "監督" == staff.css("th").text
-        meta = Meta.create(name: staff.css("td a").text)
-        meta = Meta.find_by_name(staff.css("td a").text)
-        Director.create(movie_id: movie.id, meta_id: meta.id)
+        meta = Meta.create(name: staff.css("td a").text.strip, category: 0)
+        meta = Meta.where(name: staff.css("td a").text.strip, category: 0).first
+        MetaRelation.create(movie_id: movie.id, meta_id: meta.id)
       end
+
       if "脚本" == staff.css("th").text
-        meta = Meta.create(name: staff.css("td a").text)
-        meta = Meta.find_by_name(staff.css("td a").text)
-        Script.create(movie_id: movie.id, meta_id: meta.id)
+        meta = Meta.create(name: staff.css("td a").text.strip, category: 1)
+        meta = Meta.where(name: staff.css("td a").text.strip, category: 1).first
+        MetaRelation.create(movie_id: movie.id, meta_id: meta.id)
       end
+
       if "原作" == staff.css("th").text
-        meta = Meta.create(name: staff.css("td a").text)
-        meta = Meta.find_by_name(staff.css("td a").text)
-        Original.create(movie_id: movie.id, meta_id: meta.id)
+        meta = Meta.create(name: staff.css("td a").text.strip, category: 2)
+        meta = Meta.where(name: staff.css("td a").text.strip, category: 2).first
+        MetaRelation.create(movie_id: movie.id, meta_id: meta.id)
       end
     end
+
     doc.css("#castArea tr").each do |cast|
-      meta = Meta.create(name: cast.css("td a").text)
-      meta = Meta.find_by_name(cast.css("td a").text)
-      Cast.create(movie_id: movie.id, meta_id: meta.id)
+      meta = Meta.create(name: cast.css("td a").text.strip, category: 3)
+      meta = Meta.where(name: cast.css("td a").text.strip, category: 3).first
+      MetaRelation.create(movie_id: movie.id, meta_id: meta.id)
     end
+
     return movie
   end
 end

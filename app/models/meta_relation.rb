@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: directors
+# Table name: meta_relations
 #
 #  id         :integer          not null, primary key
 #  movie_id   :integer
@@ -9,6 +9,8 @@
 #  updated_at :datetime         not null
 #
 
-class Director < ActiveRecord::Base
-  validates :movie_id, uniqueness: { scope: [:meta_id] }
+class MetaRelation < ActiveRecord::Base
+  validates_uniqueness_of :movie_id, :scope => :meta_id
+  belongs_to :meta
+  belongs_to :movie
 end

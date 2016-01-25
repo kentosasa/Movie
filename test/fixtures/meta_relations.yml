@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: casts
+# Table name: meta_relations
 #
 #  id         :integer          not null, primary key
 #  movie_id   :integer
@@ -9,8 +9,12 @@
 #  updated_at :datetime         not null
 #
 
-class Cast < ActiveRecord::Base
-  validates :movie_id, uniqueness: { scope: [:meta_id] }
-  belongs_to :movie
-  belongs_to :meta
-end
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  movie_id: 1
+  meta_id: 1
+
+two:
+  movie_id: 1
+  meta_id: 1

@@ -1,0 +1,10 @@
+#movie
+  .show
+    %h1 映画「#{@movie.title}」の予告動画とあらすじ
+    .youtube
+      %iframe{src: "https://www.youtube.com/embed/#{@movie.youtube.youtube_id}", frameborder: "0", allowfullscreen: true }
+    .content
+      %h2.headline あらすじ
+      = simple_format @movie.story.gsub("。", "。\n")
+      %h2.headline 解説
+      = simple_format @movie.description.gsub("。", "。\n")

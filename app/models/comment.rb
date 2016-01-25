@@ -1,14 +1,15 @@
 # == Schema Information
 #
-# Table name: originals
+# Table name: comments
 #
 #  id         :integer          not null, primary key
 #  movie_id   :integer
-#  meta_id    :integer
+#  user_name  :string
+#  text       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Original < ActiveRecord::Base
-  validates :movie_id, uniqueness: { scope: [:meta_id] }
+class Comment < ActiveRecord::Base
+  belongs_to :movie
 end

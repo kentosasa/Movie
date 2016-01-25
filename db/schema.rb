@@ -11,18 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124082018) do
+ActiveRecord::Schema.define(version: 20160125044025) do
 
-  create_table "casts", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.integer  "movie_id"
-    t.integer  "meta_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "directors", force: :cascade do |t|
-    t.integer  "movie_id"
-    t.integer  "meta_id"
+    t.string   "user_name"
+    t.text     "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,8 +24,16 @@ ActiveRecord::Schema.define(version: 20160124082018) do
   create_table "meta", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "category",    default: 0, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "meta_relations", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "meta_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "movies", force: :cascade do |t|
@@ -42,20 +44,6 @@ ActiveRecord::Schema.define(version: 20160124082018) do
     t.integer  "status"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "originals", force: :cascade do |t|
-    t.integer  "movie_id"
-    t.integer  "meta_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "scripts", force: :cascade do |t|
-    t.integer  "movie_id"
-    t.integer  "meta_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "youtubes", force: :cascade do |t|
