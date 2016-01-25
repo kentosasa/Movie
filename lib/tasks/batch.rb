@@ -1,8 +1,22 @@
 class Tasks::Batch
+  def self.test
+    youtube(Movie.find(388))
+  end
+
   def self.execute
     2326.upto(100000) do |i|
       movie = get_movie("http://movie.walkerplus.com/mv#{i}/")
       youtube(movie)
+    end
+  end
+
+  def self.set_status
+    Movie.all.each do |movie|
+      if movie.youtube.present?
+        movie.update(status: 1)
+      else
+        movie.update(status: nil)
+      end
     end
   end
 
@@ -51,6 +65,7 @@ class Tasks::Batch
       tmp[:id] = item[0]["id"]["videoId"]
       tmp[:title] = item[0]["snippet"]["title"]
     end
+    # youtubeIDが存在しない場合があるからvalidationの制約をつけた
     Youtube.create(movie_id: movie_id, youtube_id: tmp[:id], title: tmp[:title].strip)
   end
 

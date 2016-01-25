@@ -12,6 +12,7 @@
 
 class Youtube < ActiveRecord::Base
   validates :movie_id, uniqueness: true
+  validates :youtube_id, presence: true
   def thumbnail
     return "http://i.ytimg.com/vi/#{self.youtube_id}/mqdefault.jpg"
   end

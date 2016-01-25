@@ -4,7 +4,18 @@
     .youtube
       %iframe{src: "https://www.youtube.com/embed/#{@movie.youtube.youtube_id}", frameborder: "0", allowfullscreen: true }
     .content
-      %h2.headline あらすじ
-      = simple_format @movie.story.gsub("。", "。\n")
-      %h2.headline 解説
-      = simple_format @movie.description.gsub("。", "。\n")
+      - if @movie.story.present?
+        %h2.headline あらすじ
+        = simple_format @movie.story.gsub("。", "。\n")
+      - if @movie.description.present?
+        %h2.headline 解説
+        = simple_format @movie.description.gsub("。", "。\n")
+      - @movie.metas.each do |meta|
+        - if meta.movies.count > 4
+          %h2.headline #{meta.status}「#{meta.name}」の関連映画
+          - meta.movies.where.not(id: @movie.id).limit(3).each do |related|
+            = link_to movie_path(related) do
+              %li.related
+                %img{src: "#{related.youtube.thumbnail}"}
+                %h4.label= related.title
+

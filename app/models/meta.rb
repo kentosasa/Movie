@@ -12,5 +12,11 @@
 
 class Meta < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => :category
-  has_many :casts
+  has_many :meta_relations
+  has_many :movies, through: :meta_relations
+  STATUS = ["監督", "脚本", "原作", "役者"]
+
+  def status
+    STATUS[self.category]
+  end
 end

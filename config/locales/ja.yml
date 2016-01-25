@@ -1,0 +1,8 @@
+ja:
+  enums:
+    meta:
+      category:
+        director: 監督
+        script: 脚本
+        original: 原作
+        cast: 役者

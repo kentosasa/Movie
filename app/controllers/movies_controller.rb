@@ -14,7 +14,7 @@
 
 class MoviesController < ApplicationController
   def index
-    @movie = Movie.find(3326)
+    @movies = Movie.feed.limit(10)
   end
 
   def show
