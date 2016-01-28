@@ -14,7 +14,7 @@
           予告映画.xyz
         %p.description
           今週話題の新作をチェック
-        = form_tag(movies_path, class: "search-box") do
+        = form_tag(search_movies_path, class: "search-box") do
           = text_field_tag(:q, "", class: "box middle")
           = button_tag type: "submit", class: "search middle" do
             = fa_icon "search"
@@ -25,4 +25,5 @@
         .side-bar
         .cf
     %footer
-      %li.center お問い合わせ
+      %li.center
+        = link_to "お問い合わせ", "mailto:info@example.com?subject=問い合わせ&amp;body=ご記入ください"

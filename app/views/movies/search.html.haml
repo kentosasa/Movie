@@ -1,4 +1,4 @@
 #movie
   .index
-    %h1.headline 本日の新着
+    %h1.headline 「#{@q}」の検索結果
     = render partial: "shared/feed", locals: {movies: @movies}

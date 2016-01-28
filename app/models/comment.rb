@@ -13,4 +13,5 @@
 class Comment < ActiveRecord::Base
   validates_uniqueness_of :text, :scope => :movie_id
   belongs_to :movie
+  default_scope ->{ order("created_at desc") }
 end

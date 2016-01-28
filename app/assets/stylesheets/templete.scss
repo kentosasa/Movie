@@ -1,11 +1,12 @@
 $base-color: #FFC107;
 $accent-color: #FFA000;
+$background: #F9F9F9;
 $white: #fff;
 $header-height: 64px;
 $text: #333;
 
 body, html{
-  background: #F9F9F9;
+  background: $background;
   display: block;
 }
 ul, li {
@@ -78,6 +79,9 @@ footer {
   color: $white;
   height: 100px;
   width: 100%;
+  a {
+    color: $white;
+  }
 }
 .cf:after{
   content: "";
@@ -137,7 +141,7 @@ footer {
     }
     .content {
       ul {
-        padding: 8px;
+        padding: 8px 16px;
         li {
           width: 100%;
           padding: 12px 0px;
@@ -208,6 +212,18 @@ footer {
         background-color: rgba(0, 0, 0, 0.5);
         color: $white;
       }
+    }
+  }
+  .review {
+    padding: 12px;
+    border-top: solid 2px $background;
+    .body {
+      width: 100%;
+      font-size: 1em;
+    }
+    .info {
+      font-size: 0.7em;
+      text-align: right;
     }
   }
 }

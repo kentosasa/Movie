@@ -15,8 +15,13 @@ class Meta < ActiveRecord::Base
   has_many :meta_relations
   has_many :movies, through: :meta_relations
   STATUS = ["監督", "脚本", "原作", "役者"]
+  SCHEMA = ["director", "author", "author", "actor"]
 
   def status
     STATUS[self.category]
+  end
+
+  def schema
+    SCHEMA[self.category]
   end
 end

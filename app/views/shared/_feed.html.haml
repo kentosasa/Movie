@@ -1,0 +1,10 @@
+.content
+  %ul
+    - movies.each do |movie|
+      = link_to movie_path(movie.id) do
+        %li.cf
+          .thumnail{ style: "background-image: url(#{movie.youtube.thumbnail});"}
+          %h2
+            = movie.title
+          %h3
+            = movie.story[0, 200] + '...'
