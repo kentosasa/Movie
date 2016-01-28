@@ -1,6 +1,8 @@
 class Tasks::Batch
   def self.test
-    youtube(Movie.find(388))
+    Movie.all.each do |movie|
+      youtube_comment(movie)
+    end
   end
 
   def self.execute
@@ -70,16 +72,24 @@ class Tasks::Batch
   end
 
   # コメントの取得
-  def self.youtube_comment
-    id = "5icN4ISebN8"
+  def self.youtube_comment(movie)
+    return false if movie.status != 1
+    id = movie.youtube.youtube_id
     response = Faraday.get "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyBtFzBLcBPM3TRia7AnXRpqX_SCY3y1-KM&textFormat=plainText&part=snippet&videoId=#{id}&maxResults=50"
-
-    JSON.parse(response.body)["items"].each do |item|
+    result = []
+    items = JSON.parse(response.body)["items"]
+    return false unless items.present?
+    items.each do |item|
       comment = {}
       item = item["snippet"]["topLevelComment"]["snippet"]
       comment[:text] = item["textDisplay"]
       comment[:user_image] = item["authorProfileImageUrl"]
       comment[:user_name] = item["authorDisplayName"]
+      comment[:created_at] = DateTime.parse(item["updatedAt"])
+      result << comment
+    end
+    result.each do |comment|
+      Comment.create(movie_id: movie.id, user_name: comment[:user_name], text: comment[:text], created_at: comment[:created_at])
     end
   end
 
