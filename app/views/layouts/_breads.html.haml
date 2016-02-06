@@ -1,0 +1,10 @@
+%ul.cf
+  %li{itemscope: true,  itemtype: "http://data-vocabulary.org/Breadcrumb"}
+    %a{href: "/", itemprop: "url" }
+      %span{itemprop: "title"} ホーム
+  - if @breads.present?
+    - @breads.each do |bread|
+      %li{itemscope: true,  itemtype: "http://data-vocabulary.org/Breadcrumb"}
+        %a{href: "#{bread[:url]}", itemprop: "url" }
+          %span{itemprop: "title"}
+            = bread[:title]

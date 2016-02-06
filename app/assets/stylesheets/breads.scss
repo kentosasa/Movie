@@ -1,0 +1,30 @@
+.breads {
+  background: #fff;
+  border-bottom: 1px solid #dedede;
+  padding: 0px 10px;
+  ul {
+    margin: 0px;
+    text-align: left;
+    a {
+      text-decoration: none;
+    }
+    li {
+      position: relative;
+      display: block;
+      float: left;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      list-style-type: none;
+      font-size: 10px;
+      margin-right: 1em;
+      text-shadow: 0 1px 0 white;
+    }
+    li:before {
+      content: ">>　";
+    }
+    li:first-child:before{
+      content: none;
+    }
+  }
+}

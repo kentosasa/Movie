@@ -14,6 +14,7 @@
 
 class MoviesController < ApplicationController
   before_action :set_meta, only: [:show, :comment]
+  before_action :set_breads, only: [:show, :comment]
   def index
     ids = Comment.pluck(:movie_id).uniq
     movies = Movie.where(id: ids).sort_by{|o| ids.index(o.id)}
@@ -44,5 +45,12 @@ class MoviesController < ApplicationController
     keywords = movie.title + keywords.delete!("#")
     set_meta_tags keywords: keywords, og: { vide: "https://www.youtube.com/watch?v=#{movie.youtube.youtube_id}"}
     view_context.set_title("#{movie.title}の予告動画とあらすじ")
+  end
+
+  def set_breads
+    @breads = []
+    movie = Movie.find(params[:id])
+    @breads << {url: "#{meta_path(movie.director)}", title: "#{movie.director.name}"} if movie.director.present?
+    @breads << {url: "#{movie_path(movie)}", title: "#{movie.title}"}
   end
 end
