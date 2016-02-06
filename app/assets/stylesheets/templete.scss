@@ -141,6 +141,20 @@ footer {
     font-weight: bold;
   }
 }
+.pagination {
+  text-align: center;
+  .page {
+    border: 1px solid #eee;
+    padding: 4px 8px;
+    margin: 4px;
+    text-align: center;
+    display: inline-block;
+  }
+  .current {
+    background: gray;
+    color: white;
+  }
+}
 .cf:after{
   content: "";
   clear: both;

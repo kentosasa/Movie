@@ -43,6 +43,7 @@ gem "font-awesome-rails"
 gem 'meta-tags'
 gem 'google-analytics-rails'
 gem 'breadcrumbs_on_rails'
+gem 'kaminari'
 
 
 group :development, :test do

@@ -15,8 +15,8 @@
 class MoviesController < ApplicationController
   def index
     ids = Comment.pluck(:movie_id).uniq
-    @movies = Movie.where(id: ids).sort_by{|o| ids.index(o.id)}
-    @movies = @movies[0..19]
+    movies = Movie.where(id: ids).sort_by{|o| ids.index(o.id)}
+    @movies = Kaminari.paginate_array(movies).page(params[:page])
   end
 
   def show
@@ -25,7 +25,8 @@ class MoviesController < ApplicationController
 
   def search
     @q = params[:q]
-    @movies = Movie.where("title like '%" + @q + "%'").order("created_at desc")
+    movies = Movie.where("title like '%" + @q + "%'").order("created_at desc")
+    @movies = Kaminari.paginate_array(movies).page(params[:page])
   end
 
   def comment
