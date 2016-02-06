@@ -18,6 +18,10 @@
           = text_field_tag(:q, "", class: "box middle")
           = button_tag type: "submit", class: "search middle" do
             = fa_icon "search"
+    / - @notify = {message: "メッセージ"}
+    - if @notify.present?
+      .alert-box
+        .center.message= @notify[:message]
     .container
       .contents
         %section.main
