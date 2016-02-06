@@ -21,8 +21,9 @@
         = link_to "https://plus.google.com/share?url=#{request.original_url}" do
           %i.fa-google.fa
           .comment Google+
-    .youtube
-      %iframe{src: "https://www.youtube.com/embed/#{@movie.youtube.youtube_id}", frameborder: "0", allowfullscreen: true }
+    - if @movie.youtube.title.include? "#{@movie.title}"
+      .youtube
+        %iframe{src: "https://www.youtube.com/embed/#{@movie.youtube.youtube_id}", frameborder: "0", allowfullscreen: true }
     - if @movie.story.present?
       %h2.headline あらすじ
       %span{itemprop: "description"}= simple_format @movie.story.gsub("。", "。\n")
@@ -42,6 +43,12 @@
               %li.related
                 %img{src: "#{related.youtube.thumbnail}"}
                 %h4.label= related.title
+    .cf
+    - unless @movie.youtube.title.include? "#{@movie.title}"
+      %h2.headline-large #{@movie.title}の関連動画「#{@movie.youtube.title}」
+      .youtube
+        %iframe{src: "https://www.youtube.com/embed/#{@movie.youtube.youtube_id}", frameborder: "0", allowfullscreen: true }
+
     - if @movie.comments.present?
       %h2.headline #{@movie.youtube.title} の感想
       - @movie.comments.each do |comment|
