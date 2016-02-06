@@ -4,6 +4,9 @@ $background: #F9F9F9;
 $white: #fff;
 $header-height: 64px;
 $text: #333;
+$border-size-pc: 960px;
+$border-size-tablet: 640px;
+
 
 #movie {
   .index {
@@ -37,22 +40,42 @@ $text: #333;
         height: 100% !important;
       }
     }
-    .related {
-      width: -webkit-calc(100% / 3);
-      width: -moz-calc(100% / 3);
-      width: calc(100% / 3);
-      float: left;
-      position: relative;
-      img {
-        width: 100%;
+    @media screen and (min-width: $border-size-pc) {
+      .related {
+        width: -webkit-calc(100% / 3);
+        width: -moz-calc(100% / 3);
+        width: calc(100% / 3);
+        float: left;
+        position: relative;
+        img {
+          width: 100%;
+        }
+        .label {
+          width: 100%;
+          text-align: center;
+          position: absolute;
+          bottom: 6px;
+          background-color: rgba(0, 0, 0, 0.5);
+          color: $white;
+        }
       }
-      .label {
+    }
+    @media screen and (max-width: $border-size-pc) {
+      .related {
+        float: left;
+        position: relative;
         width: 100%;
-        text-align: center;
-        position: absolute;
-        bottom: 6px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: $white;
+        img {
+          width: 100%;
+        }
+        .label {
+          width: 100%;
+          text-align: center;
+          position: absolute;
+          bottom: 6px;
+          background-color: rgba(0, 0, 0, 0.5);
+          color: $white;
+        }
       }
     }
   }
