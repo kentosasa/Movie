@@ -13,6 +13,7 @@
 #
 
 class MoviesController < ApplicationController
+  before_action :set_meta, only: [:show, :comment]
   def index
     ids = Comment.pluck(:movie_id).uniq
     movies = Movie.where(id: ids).sort_by{|o| ids.index(o.id)}
@@ -26,6 +27,7 @@ class MoviesController < ApplicationController
   def search
     @q = params[:q]
     movies = Movie.where("title like '%" + @q + "%'").order("created_at desc")
+    set_meta_tags title: "#{@q}の検索結果"
     @movies = Kaminari.paginate_array(movies).page(params[:page])
   end
 
@@ -33,5 +35,13 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     Comment.create(movie_id: params[:id], user_name: params[:user_name][0], text: params[:text][0])
     render action: :show
+  end
+
+  private
+  def set_meta
+    movie = Movie.find(params[:id])
+    keywords = movie.metas.inject { |metas, meta| "#{metas}, #{meta.name}"}
+    keywords = movie.title + keywords.delete!("#")
+    set_meta_tags title: "#{movie.title}の予告動画とあらすじ", keywords: keywords
   end
 end
