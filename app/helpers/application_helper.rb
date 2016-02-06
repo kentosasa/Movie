@@ -8,20 +8,21 @@ module ApplicationHelper
       keywords: "映画, PV, 予告, 予告映像, 劇場, 映画館, あらすじ, 感想, レビュー",
       canonical: request.original_url,
       og: {
-        title: "#{title}",
+        title: 'Dekopon 映画の予告映像とあらすじ',
         type: "article",
         url: request.original_url,
-        image: "http://userdisk.webry.biglobe.ne.jp/002/884/95/N000/000/001/122769971396716214170.PNG",
-        site_name: :site,
+        site_name: 'Dekopon 映画の予告映像とあらすじ',
         description: :description,
         locale: 'ja_JP'
       },
       twitter: {
         card: "summary",
-        title: "#{title}",
-        description: :description,
-        image: "http://userdisk.webry.biglobe.ne.jp/002/884/95/N000/000/001/122769971396716214170.PNG"
+        description: :title,
         }
       }
+  end
+
+  def set_title(par)
+    set_meta_tags title: par, og: {title: par}, twitter: {description: "#{par} | Dekopon 映画の予告映像とあらすじ"}
   end
 end
