@@ -51,3 +51,9 @@
           .info
             %span.published{itemprop: "datePublished"}= comment.created_at.strftime("%Y年 %m月 %d日")
             %span.user{itemprop: "author"}= comment.user_name
+    = form_tag(:controller => "movies", :action => "comment") do
+      = label(:user_name, "名前")
+      = text_field(:user_name, "", class: "name")
+      = label(:text, "感想")
+      = text_area(:text, "", class: "text")
+      = submit_tag "作成"

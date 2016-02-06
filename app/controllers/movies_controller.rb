@@ -27,4 +27,10 @@ class MoviesController < ApplicationController
     @q = params[:q]
     @movies = Movie.where("title like '%" + @q + "%'").order("created_at desc")
   end
+
+  def comment
+    @movie = Movie.find(params[:id])
+    Comment.create(movie_id: params[:id], user_name: params[:user_name][0], text: params[:text][0])
+    render action: :show
+  end
 end

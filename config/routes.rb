@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     collection do
       post 'search'
     end
+    member do
+      post 'comment'
+    end
   end
 
   resources :metas, :only => [:show] do

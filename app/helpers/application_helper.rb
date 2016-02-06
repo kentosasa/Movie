@@ -1,6 +1,6 @@
 module ApplicationHelper
   def default_meta_tags
-    title = 'Cinemanist'
+    title = 'Dekopon'
     {
       site: "#{title}",
       reverse: true,
