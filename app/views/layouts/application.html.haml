@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    = render :partial => "layouts/meta_tags"
     %title PV
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
@@ -11,18 +11,24 @@
     %header
       .container
         %h2.title
-          予告映画.xyz
+          = link_to "Cinemanist", root_path
         %p.description
-          今週話題の新作をチェック
+          今話題の新作映画をチェック
         = form_tag(search_movies_path, class: "search-box") do
           = text_field_tag(:q, "", class: "box middle")
           = button_tag type: "submit", class: "search middle" do
             = fa_icon "search"
     .container
       .contents
-        .main
+        %section.main
           = yield
-        .side-bar
+        %section.side-bar
+          %h2 新着映画
+          - Movie.order("created_at desc").limit(20).each do |movie|
+            = link_to movie_path(movie) do
+              %li
+                %img{src: "#{movie.youtube.thumbnail}"}
+                %h4.label= movie.title
         .cf
     %footer
       %li.center

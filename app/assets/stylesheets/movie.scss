@@ -1,3 +1,71 @@
-// Place all the styles related to the movie controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$base-color: #FFC107;
+$accent-color: #FFA000;
+$background: #F9F9F9;
+$white: #fff;
+$header-height: 64px;
+$text: #333;
+
+#movie {
+  .index {
+    h1 {
+      margin-bottom: 0px;
+    }
+  }
+  .show {
+    h1 {
+      font-weight: bold;
+      font-size: 1.2em;
+      padding: 12px;
+    }
+    p {
+      display: inline-block;
+      margin: 0 12px;
+      font-size: 0.8em;
+    }
+    .youtube {
+      position: relative;
+      padding-bottom: 56.25%;
+      padding-top: 30px;
+      height: 0;
+      width: 100%;
+      overflow: hidden;
+      iframe {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100% !important;
+        height: 100% !important;
+      }
+    }
+    .related {
+      width: -webkit-calc(100% / 3);
+      width: -moz-calc(100% / 3);
+      width: calc(100% / 3);
+      float: left;
+      position: relative;
+      img {
+        width: 100%;
+      }
+      .label {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 6px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: $white;
+      }
+    }
+  }
+  .review {
+    padding: 12px;
+    border-top: solid 2px $background;
+    .body {
+      width: 100%;
+      font-size: 1em;
+    }
+    .info {
+      font-size: 0.7em;
+      text-align: right;
+    }
+  }
+}

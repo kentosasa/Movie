@@ -1,0 +1,4 @@
+#meta
+  .index
+    %h1.headline #{@meta.status}「#{@meta.name}」の記事
+    = render partial: "shared/feed", locals: {movies: @meta.movies}

@@ -35,8 +35,11 @@ header {
     float: left;
     font-size: 1.5em;
     font-weight: bold;
-    color: $white;
+
     margin-right: 8px;
+    a {
+      color: $white;
+    }
   }
   .description {
     height: 100%;
@@ -44,7 +47,7 @@ header {
     font-size: 0.4em;
     float: left;
     color: $white;
-    margin-top: 0.8em;
+    margin-top: 0.6em;
   }
   .search-box {
     float: right;
@@ -130,76 +133,16 @@ footer {
   .side-bar {
     float: right;
     width: 280px;
-    height: 100px;
     background: $white;
-  }
-}
-#movie {
-  .index {
-    h1 {
-      margin-bottom: 0px;
-    }
-    .content {
-      ul {
-        padding: 8px 16px;
-        li {
-          width: 100%;
-          padding: 12px 0px;
-          .thumnail {
-            display: inline-block;
-            float: left;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            width: 150px;
-            height: 150px;
-            margin-right: 8px;
-          }
-          h2 {
-            float: left;
-            font-size: 1.2em;
-            display: inline-block;
-            font-weight: bold;
-          }
-          h3 {
-            margin-top: 30px;
-            font-size: 0.8em;
-          }
-        }
-      }
-    }
-  }
-  .show {
-    h1 {
+    h2 {
+      background: $accent-color;
+      color: $white;
+      text-align: center;
       font-weight: bold;
-      font-size: 1.2em;
-      padding: 12px;
+      padding: 8px;
     }
-    p {
-      display: inline-block;
-      margin: 0 12px;
-      font-size: 0.8em;
-    }
-    .youtube {
-      position: relative;
-      padding-bottom: 56.25%;
-      padding-top: 30px;
-      height: 0;
+    li {
       width: 100%;
-      overflow: hidden;
-      iframe {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100% !important;
-        height: 100% !important;
-      }
-    }
-    .related {
-      width: -webkit-calc(100% / 3);
-      width: -moz-calc(100% / 3);
-      width: calc(100% / 3);
-      float: left;
       position: relative;
       img {
         width: 100%;
@@ -214,16 +157,64 @@ footer {
       }
     }
   }
-  .review {
-    padding: 12px;
-    border-top: solid 2px $background;
-    .body {
+}
+ul.social {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  text-align: center;
+  margin: 16px 0;
+  li {
+    display: table-cell;
+    padding: 8px;
+  }
+  .twitter {
+    background: #44A5EE;
+  }
+  .facebook {
+    background: #3b5998;
+  }
+  .line {
+    background: #5ae628;
+  }
+  .google {
+    background: #db4a39;
+  }
+  i {
+    color: $white;
+    font-size: 1.5em;
+  }
+  .comment {
+    color: $white;
+    font-size: 0.8em;
+  }
+}
+#feed {
+  ul {
+    padding: 8px 16px;
+    li {
       width: 100%;
-      font-size: 1em;
-    }
-    .info {
-      font-size: 0.7em;
-      text-align: right;
+      padding: 12px 0px;
+      .thumnail {
+        display: inline-block;
+        float: left;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 150px;
+        height: 150px;
+        margin-right: 8px;
+      }
+      h2 {
+        float: left;
+        font-size: 1.2em;
+        display: inline-block;
+        font-weight: bold;
+      }
+      h3 {
+        margin-top: 30px;
+        font-size: 0.8em;
+      }
     }
   }
 }

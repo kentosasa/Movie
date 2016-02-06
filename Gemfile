@@ -40,7 +40,10 @@ gem 'nokogiri'
 gem 'faraday'
 gem 'google-api-client', '0.8.2', require: 'google/api_client'
 gem "font-awesome-rails"
-gem 'enum_help'
+gem 'meta-tags'
+gem 'google-analytics-rails'
+gem 'breadcrumbs_on_rails'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

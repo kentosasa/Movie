@@ -25,6 +25,6 @@ class MoviesController < ApplicationController
 
   def search
     @q = params[:q]
-    @movies = Movie.where("title like '%" + @q + "%'")
+    @movies = Movie.where("title like '%" + @q + "%'").order("created_at desc")
   end
 end
