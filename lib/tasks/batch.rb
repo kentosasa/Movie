@@ -14,6 +14,7 @@ class Tasks::Batch
       youtube(movie)
       youtube_comment(movie)
     end
+    set_status
   end
 
   def self.set_status
@@ -82,7 +83,7 @@ class Tasks::Batch
 
   # コメントの取得
   def self.youtube_comment(movie)
-    return false if movie.status != 1
+    return false unless movie.youtube.present?
     id = movie.youtube.youtube_id
     response = Faraday.get "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyBtFzBLcBPM3TRia7AnXRpqX_SCY3y1-KM&textFormat=plainText&part=snippet&videoId=#{id}&maxResults=50"
     result = []
