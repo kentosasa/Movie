@@ -13,6 +13,7 @@ $border-size-tablet: 640px;
     width: $border-size-pc;
     margin: 0 auto;
     height: 100%;
+    overflow: hidden;
     position: relative;
   }
   .main {

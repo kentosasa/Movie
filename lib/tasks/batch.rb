@@ -6,9 +6,13 @@ class Tasks::Batch
   end
 
   def self.execute
-    2326.upto(100000) do |i|
+    repeat_count = 0
+    1.upto(100000) do |i|
+      repeat_count += 1
+      puts repeat_count
       movie = get_movie("http://movie.walkerplus.com/mv#{i}/")
       youtube(movie)
+      youtube_comment(movie)
     end
   end
 
@@ -69,6 +73,11 @@ class Tasks::Batch
     end
     # youtubeIDが存在しない場合があるからvalidationの制約をつけた
     Youtube.create(movie_id: movie_id, youtube_id: tmp[:id], title: tmp[:title].strip)
+    if movie.youtube.present?
+      movie.update(status: 1)
+    else
+      movie.update(status: nil)
+    end
   end
 
   # コメントの取得
