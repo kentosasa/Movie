@@ -73,7 +73,7 @@ class Tasks::Batch
       tmp[:title] = item[0]["snippet"]["title"]
     end
     # youtubeIDが存在しない場合があるからvalidationの制約をつけた
-    Youtube.create(movie_id: movie_id, youtube_id: tmp[:id], title: tmp[:title].strip)
+    Youtube.create(movie_id: movie_id, youtube_id: tmp[:id], title: tmp[:title].strip) if tmp[:id].present?
     if movie.youtube.present?
       movie.update(status: 1)
     else

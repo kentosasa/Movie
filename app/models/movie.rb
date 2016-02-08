@@ -18,7 +18,6 @@ class Movie < ActiveRecord::Base
   has_many :metas, through: :meta_relations
   has_many :comments
   has_one :youtube
-  before_save :prepare_save
   default_scope ->{ where(status: 1) }
 
   def self.feed
@@ -27,9 +26,5 @@ class Movie < ActiveRecord::Base
 
   def director
     self.metas.where(category: 0).first
-  end
-
-  def prepare_save
-    self.title = self.title.strip
   end
 end
