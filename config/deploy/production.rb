@@ -60,12 +60,10 @@
 #     # password: 'please use keys'
 #   }
 server   '153.126.165.245',
-  user:  'manga',
+  user:  'root',
   roles: %w{app db web},
   ssh_options: {
     keys: [
-      # for ec2
-      File.expand_path('~/.ssh/manga'),
       # for github
       File.expand_path('~/.ssh/id_rsa')
     ],
