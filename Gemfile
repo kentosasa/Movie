@@ -45,6 +45,14 @@ gem 'google-analytics-rails'
 gem 'breadcrumbs_on_rails'
 gem 'kaminari'
 
+group :production, :staging do
+  gem 'unicorn'
+  gem 'capistrano',          require: false
+  gem 'capistrano-rails',    require: false
+  gem 'capistrano-rbenv',    require: false
+  gem 'capistrano-bundler',  require: false
+  gem 'capistrano3-unicorn', require: false
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

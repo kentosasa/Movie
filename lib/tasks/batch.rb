@@ -68,10 +68,11 @@ class Tasks::Batch
         end
       end
       unless tmp[:id].present?
-        item = result.data.to_hash["items"]
-        return unless item.present?
-        tmp[:id] = item[0]["id"]["videoId"]
-        tmp[:title] = item[0]["snippet"]["title"]
+        next
+        # item = result.data.to_hash["items"]
+        # return unless item.present?
+        # tmp[:id] = item[0]["id"]["videoId"]
+        # tmp[:title] = item[0]["snippet"]["title"]
       end
       # youtubeIDが存在しない場合があるからvalidationの制約をつけた
       Youtube.create(movie_id: movie_id, youtube_id: tmp[:id], title: tmp[:title].strip) if tmp[:id].present?
@@ -154,7 +155,6 @@ class Tasks::Batch
         meta = Meta.where(name: cast.css("td a").text.strip, category: 3).first
         MetaRelation.create(movie_id: movie.id, meta_id: meta.id)
       end
-
       return movie
     end
   rescue
