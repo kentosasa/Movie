@@ -44,6 +44,8 @@ gem 'meta-tags'
 gem 'google-analytics-rails'
 gem 'breadcrumbs_on_rails'
 gem 'kaminari'
+gem 'whenever', :require => false
+
 
 group :production, :staging do
   gem 'unicorn'
