@@ -27,7 +27,11 @@ class MoviesController < ApplicationController
 
   def search
     @q = params[:q]
-    movies = Movie.where("title like '%" + @q + "%'").order("created_at desc")
+    movies = Movie.where(status: 1).where("title like '%" + @q + "%'")
+    Meta.where("name like '%" + @q + "%'").each do |meta|
+      movies += meta.movies.where(status: 1)
+    end
+    movies.uniq!
     @movies = Kaminari.paginate_array(movies).page(params[:page])
     view_context.set_title("#{@q}の検索結果")
   end

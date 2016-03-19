@@ -6,6 +6,31 @@ class Tasks::Batch
   end
 
   def self.old_movie
+    1995.upto(2015) do |i|
+      1.upto(12) do |m|
+        puts "http://movie.walkerplus.com/list/#{i}/#{sprintf("%02d",m)}/"
+        response = Faraday.get "http://movie.walkerplus.com/list/#{i}/#{sprintf("%02d",m)}/"
+        doc = Nokogiri::HTML.parse(response.body)
+        doc.css('#personMovieList .hiraganaGroup .movie h3 a').each do |link|
+          begin
+            url = "http://movie.walkerplus.com#{link[:href]}"
+            movie = get_movie(url)
+            get_youtube(movie)
+            youtube_comment(movie)
+            if movie.youtube.present?
+              Movie.find(movie.id).update(status: 1)
+            else
+              Movie.find(movie.id).update(status: 0)
+            end
+          rescue
+            puts "undefined method `youtube' for nil:NilClass (NoMethodError)"
+          end
+        end
+      end
+    end
+  end
+
+  def self.recent_movie
     1.upto(15) do |i|
       response = Faraday.get "http://movie.walkerplus.com/list/#{i}.html"
       doc = Nokogiri::HTML.parse(response.body)
@@ -16,9 +41,9 @@ class Tasks::Batch
           get_youtube(movie)
           youtube_comment(movie)
           if movie.youtube.present?
-            movie.update(status: 1)
+            Movie.find(movie.id).update(status: 1)
           else
-            movie.update(status: nil)
+            Movie.find(movie.id).update(status: 0)
           end
         rescue
           puts "undefined method `youtube' for nil:NilClass (NoMethodError)"
@@ -36,9 +61,9 @@ class Tasks::Batch
       get_youtube(movie)
       youtube_comment(movie)
       if movie.youtube.present?
-        movie.update(status: 1)
+        Movie.find(movie.id).update(status: 1)
       else
-        movie.update(status: nil)
+        Movie.find(movie.id).update(status: nil)
       end
     end
   end
@@ -55,15 +80,15 @@ class Tasks::Batch
   #   set_status
   # end
 
-  # def self.set_status
-  #   Movie.all.each do |movie|
-  #     if movie.youtube.present?
-  #       movie.update(status: 1)
-  #     else
-  #       movie.update(status: nil)
-  #     end
-  #   end
-  # end
+  def self.set_status
+    Movie.all.each do |movie|
+      if movie.youtube.present?
+        Movie.find(movie.id).update(status: 1)
+      else
+        Movie.find(movie.id).update(status: 0)
+      end
+    end
+  end
 
   def self.get_youtube(movie)
     begin

@@ -21,6 +21,7 @@
 set :environment, :production
 every :week do
   runner "Tasks::Batch.crowl"
+  runner "Tasks::Batch.set_status"
 end
 every :hour do
   rake 'sitemap:refresh'
