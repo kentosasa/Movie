@@ -45,6 +45,7 @@ gem 'google-analytics-rails'
 gem 'breadcrumbs_on_rails'
 gem 'kaminari'
 gem 'whenever', :require => false
+gem 'sitemap_generator'
 
 
 group :production, :staging do

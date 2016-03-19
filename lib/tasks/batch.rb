@@ -6,7 +6,7 @@ class Tasks::Batch
   end
 
   def self.old_movie
-    1.upto(100) do |i|
+    1.upto(15) do |i|
       response = Faraday.get "http://movie.walkerplus.com/list/#{i}.html"
       doc = Nokogiri::HTML.parse(response.body)
       doc.css('#onScreenBoxContent .onScreenBoxContentMovie h3 a').each do |link|

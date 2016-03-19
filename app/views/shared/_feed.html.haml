@@ -5,6 +5,9 @@
         %li.cf
           .thumnail{ style: "background-image: url(#{movie.youtube.thumbnail});"}
           %h2
-            = movie.title
+            - if movie.title.size > 20
+              = movie.title[0, 20] + '...'
+            - else
+              = movie.title
           %h3
             = movie.story[0, 200] + '...'

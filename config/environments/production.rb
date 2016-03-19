@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.logger = Logger.new("log/production.log", 5, 10 * 1024 * 1024)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
