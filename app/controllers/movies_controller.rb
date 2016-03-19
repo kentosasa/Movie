@@ -41,9 +41,7 @@ class MoviesController < ApplicationController
   private
   def set_meta
     movie = Movie.find(params[:id])
-    keywords = movie.metas.inject { |metas, meta| "#{metas}, #{meta.name}"}
-    keywords = movie.title + keywords.delete!("#")
-    set_meta_tags keywords: keywords, og: { vide: "https://www.youtube.com/watch?v=#{movie.youtube.youtube_id}"}
+    set_meta_tags og: { vide: "https://www.youtube.com/watch?v=#{movie.youtube.youtube_id}"}
     view_context.set_title("#{movie.title}の予告動画とあらすじ")
   end
 

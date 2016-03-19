@@ -14,44 +14,44 @@
 ActiveRecord::Schema.define(version: 20160125044025) do
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "movie_id"
-    t.string   "user_name"
-    t.text     "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "movie_id",   limit: 4
+    t.string   "user_name",  limit: 255
+    t.text     "text",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "meta", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "category",    default: 0, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "category",    limit: 4,     default: 0, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "meta_relations", force: :cascade do |t|
-    t.integer  "movie_id"
-    t.integer  "meta_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "movie_id",   limit: 4
+    t.integer  "meta_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "movies", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "year"
-    t.text     "description"
-    t.text     "story"
-    t.integer  "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "title",       limit: 255
+    t.integer  "year",        limit: 4
+    t.text     "description", limit: 65535
+    t.text     "story",       limit: 65535
+    t.integer  "status",      limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "youtubes", force: :cascade do |t|
-    t.integer  "movie_id"
-    t.string   "youtube_id"
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "movie_id",   limit: 4
+    t.string   "youtube_id", limit: 255
+    t.string   "title",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
