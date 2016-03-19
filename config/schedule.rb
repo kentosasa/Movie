@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 set :environment, :production
-every '* * *' do
+every :week do
   runner "Tasks::Batch.crowl"
 end
