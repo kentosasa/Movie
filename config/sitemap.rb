@@ -4,7 +4,7 @@ SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/' # 保存先（この場合
 
 SitemapGenerator::Sitemap.create do
   add root_path, :priority => 0.9, :changefreq => 'daily'
-  Movie.where(staus: 1).each do |movie|
+  Movie.where(status: 1).each do |movie|
     add movie_path(movie), :lastmod => movie.updated_at
   end
   Meta.all.each do |meta|
