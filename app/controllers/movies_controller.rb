@@ -15,6 +15,7 @@
 class MoviesController < ApplicationController
   before_action :set_meta, only: [:show, :comment]
   before_action :set_breads, only: [:show, :comment]
+
   def index
     ids = Comment.pluck(:movie_id).uniq
     movies = Movie.where(id: ids).sort_by{|o| ids.index(o.id)}
