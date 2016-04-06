@@ -23,7 +23,11 @@ every :week do
   runner "Tasks::Batch.crowl"
   runner "Tasks::Batch.set_status"
 end
-every :hour do
+
+every '3 * * *' do
   rake 'sitemap:refresh'
 end
 
+every '1 * * *' do
+  runner "Tasks::Batch.update_comment"
+end

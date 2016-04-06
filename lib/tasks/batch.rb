@@ -52,6 +52,12 @@ class Tasks::Batch
     end
   end
 
+  def self.update_comment
+    Movie.last(500).each do |movie|
+      youtube_comment(movie)
+    end
+  end
+
   def self.crowl
     response = Faraday.get "http://movie.walkerplus.com/list/n1m/"
     doc = Nokogiri::HTML.parse(response.body)
