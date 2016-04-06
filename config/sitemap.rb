@@ -5,14 +5,16 @@ SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/' # 保存先（この場合
 SitemapGenerator::Sitemap.create do
   add root_path, :priority => 0.9, :changefreq => 'daily'
   Movie.where(status: 1).each do |movie|
-    if movie.comments.present?
-      add movie_path(movie), :lastmod => movie.comments.last.created_at
-    else
-      add movie_path(movie), :lastmod => movie.updated_at
+    comments = movie.comments
+    if comments.present?
+      add movie_path(movie), :lastmod => comments.last.created_at
     end
   end
   Meta.all.each do |meta|
-    add meta_path(meta), :lastmod => meta.movies.last.created_at
+    movie = meta.movies.last
+    if movie.present?
+      add meta_path(meta), :lastmod => movie.created_at
+    end
   end
   # Put links creation logic here.
   #
