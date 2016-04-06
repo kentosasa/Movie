@@ -53,7 +53,7 @@ class Tasks::Batch
   end
 
   def self.update_comment
-    Movie.last(500).each do |movie|
+    Movie.where(status: 1)last(500).each do |movie|
       youtube_comment(movie)
     end
   end
