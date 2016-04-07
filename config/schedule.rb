@@ -24,7 +24,7 @@ every :week do
   runner "Tasks::Batch.set_status"
 end
 
-every '30 3 * * *' do
+every '30 3 1 * *' do
   rake 'sitemap:refresh'
 end
 
