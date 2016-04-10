@@ -7,11 +7,11 @@ SitemapGenerator::Sitemap.create do
   Movie.where(status: 1).each do |movie|
     comments = movie.comments
     if comments.present?
-      add movie_path(movie), :lastmod => comments.last.created_at
+      add movie_path(movie), :priority => 0.7, :changefreq => 'weekly'
     end
   end
   Meta.all.each do |meta|
-    add meta_path(meta), :lastmod => meta.created_at
+    add meta_path(meta), :priority => 0.7, :changefreq => 'monthly'
   end
   # Put links creation logic here.
   #
