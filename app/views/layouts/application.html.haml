@@ -31,7 +31,7 @@
           = yield
         %section.side-bar
           %h2 新着映画
-          - Movie.where(status: 1).order("created_at desc").limit(20).each do |movie|
+          - Movie.where(status: 1).last(20).each do |movie|
             = link_to movie_path(movie) do
               %li
                 %img{src: "#{movie.youtube.thumbnail}"}

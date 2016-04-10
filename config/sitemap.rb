@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = 'http://www.decopon.link' # ホスト名
+SitemapGenerator::Sitemap.default_host = 'http://decopon.link' # ホスト名
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/' # 保存先（この場合 /public/sitemaps/以下になる）
 
 SitemapGenerator::Sitemap.create do

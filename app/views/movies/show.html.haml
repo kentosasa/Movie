@@ -30,7 +30,7 @@
     - if @movie.description.present?
       %h2.headline 解説
       %span{itemprop: "text"}= simple_format @movie.description.gsub("。", "。\n")
-    - @movie.metas.each do |meta|
+    - @movie.metas.sample(5).each do |meta|
       - if meta.movies.count > 4
         = link_to meta_path(meta) do
           %h2.headline
