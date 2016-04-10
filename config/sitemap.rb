@@ -11,10 +11,7 @@ SitemapGenerator::Sitemap.create do
     end
   end
   Meta.all.each do |meta|
-    movie = meta.movies.last
-    if movie.present?
-      add meta_path(meta), :lastmod => movie.created_at
-    end
+    add meta_path(meta), :lastmod => meta.created_at
   end
   # Put links creation logic here.
   #
