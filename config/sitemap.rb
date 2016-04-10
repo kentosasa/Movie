@@ -5,10 +5,7 @@ SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/' # 保存先（この場合
 SitemapGenerator::Sitemap.create do
   add root_path, :priority => 0.9, :changefreq => 'daily'
   Movie.where(status: 1).each do |movie|
-    comments = movie.comments
-    if comments.present?
-      add movie_path(movie), :priority => 0.7, :changefreq => 'weekly'
-    end
+    add movie_path(movie), :priority => 0.7, :changefreq => 'weekly'
   end
   Meta.all.each do |meta|
     add meta_path(meta), :priority => 0.7, :changefreq => 'monthly'
